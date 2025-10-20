@@ -1,0 +1,31 @@
+[
+  {
+    "id": 1,
+    "name": "Mock Pizza",
+    "description": "Test item",
+    "category": "Family Dining",
+    "price": 100,
+    "is_available": true,
+    "is_popular": false,
+    "is_vegetarian": true,
+    "image_url": "",
+    "dietary_flags": ["Vegetarian"],
+    "prep_time_minutes": 10,
+    "spice_level": 1
+  },
+  {
+    "id": 2,
+    "name": "Mock Water",
+    "description": "Bottled",
+    "category": "Extras",
+    "price": 30,
+    "is_available": true,
+    "is_popular": false,
+    "is_vegetarian": true,
+    "image_url": "",
+    "dietary_flags": [],
+    "prep_time_minutes": 0,
+    "spice_level": 0
+  }
+]
+
