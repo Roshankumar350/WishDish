@@ -1,0 +1,53 @@
+# Xcode build artifacts
+build/
+DerivedData/
+*.xcuserstate
+*.xcscmblueprint
+*.xccheckout
+*.xcodeproj/project.xcworkspace/xcuserdata/
+*.xcodeproj/xcuserdata/
+
+# Swift Package Manager
+.swiftpm/
+Package.resolved
+
+# CocoaPods (if used)
+Pods/
+Podfile.lock
+
+# Carthage (if used)
+Carthage/
+Carthage/Build/
+
+# Fastlane (if used)
+fastlane/report.xml
+fastlane/screenshots/
+fastlane/test_output/
+
+# User-specific settings
+*.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Logs and temp files
+*.log
+*.tmp
+*.bak
+
+# Simulator logs and device support
+Library/Developer/CoreSimulator/
+Library/Developer/Xcode/iOS DeviceSupport/
+
+# Environment files
+.env
+
+# Asset catalogs — DO NOT ignore these if actively used
+# (You’re using .xcassets for mood icons and category images, so keep them tracked)
+
+# Optional: Ignore preview thumbnails (if not needed)
+*.preview-thumbnails
+
+# Optional: Ignore crash reports
+*.crash
