@@ -67,11 +67,16 @@ WishDish is a thoughtfully crafted restaurant app designed to digitize the menu 
 
 ---
 
-## 🎥 Demo Video
+## 🎥 Demo Videos
 
-Watch WishDish in action — mood-based menu browsing, invoice creation, and real-time order tracking:
+Experience WishDish in action — modular SwiftUI architecture, mood-based browsing, and real-time order flow.
 
-▶️ [Watch the demo on YouTube Shorts](https://youtube.com/shorts/k0BMyg5lXBg?feature=share)
+### 🌞 Light Mode
+▶️ [Watch the demo](https://youtube.com/shorts/k0BMyg5lXBg?feature=share)
+
+### 🌙 Dark Mode
+▶️ [Watch the dark mode demo](https://youtube.com/shorts/qObuyOyVK2U?feature=share)
+
 
 
 ---
