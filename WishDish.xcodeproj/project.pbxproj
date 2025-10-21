@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		70FC87902EA64F9C00D6BF9F /* Requirement.md in Resources */ = {isa = PBXBuildFile; fileRef = 70FC878D2EA64F9C00D6BF9F /* Requirement.md */; };
-		70FC87912EA64F9C00D6BF9F /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 70FC878C2EA64F9C00D6BF9F /* README.md */; };
 		70FC87922EA64F9C00D6BF9F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70FC878B2EA64F9C00D6BF9F /* Assets.xcassets */; };
 		70FC87932EA64F9C00D6BF9F /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 70FC878A2EA64F9C00D6BF9F /* .gitkeep */; };
 		70FC87942EA64F9C00D6BF9F /* MenuList.json in Resources */ = {isa = PBXBuildFile; fileRef = 70FC87812EA64F9C00D6BF9F /* MenuList.json */; };
@@ -72,7 +71,6 @@
 		70FC87882EA64F9C00D6BF9F /* ViewModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModifiers.swift; sourceTree = "<group>"; };
 		70FC878A2EA64F9C00D6BF9F /* .gitkeep */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
 		70FC878B2EA64F9C00D6BF9F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		70FC878C2EA64F9C00D6BF9F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		70FC878D2EA64F9C00D6BF9F /* Requirement.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Requirement.md; sourceTree = "<group>"; };
 		70FC878E2EA64F9C00D6BF9F /* WishDishApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishDishApp.swift; sourceTree = "<group>"; };
 		70FD2DD32E96E50D005EA005 /* WishDish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WishDish.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -214,7 +212,6 @@
 				70FC87892EA64F9C00D6BF9F /* Utility */,
 				70FC878A2EA64F9C00D6BF9F /* .gitkeep */,
 				70FC878B2EA64F9C00D6BF9F /* Assets.xcassets */,
-				70FC878C2EA64F9C00D6BF9F /* README.md */,
 				70FC878D2EA64F9C00D6BF9F /* Requirement.md */,
 				70FC878E2EA64F9C00D6BF9F /* WishDishApp.swift */,
 			);
@@ -359,7 +356,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				70FC87902EA64F9C00D6BF9F /* Requirement.md in Resources */,
-				70FC87912EA64F9C00D6BF9F /* README.md in Resources */,
 				70FC87922EA64F9C00D6BF9F /* Assets.xcassets in Resources */,
 				70FC87932EA64F9C00D6BF9F /* .gitkeep in Resources */,
 				70FC87942EA64F9C00D6BF9F /* MenuList.json in Resources */,
