@@ -7,7 +7,8 @@
 
 import Combine
 import Foundation
-
+// TODO: - [NOTE]: This is used to toggle async and sync call 
+let loadAychronously: Bool = true
 
 class TabViewModel: ObservableObject {
     @Published var menuItems: [MenuItem] = []
@@ -18,17 +19,38 @@ class TabViewModel: ObservableObject {
     
     init(loader: ClientResourceLoading = ClientResourceLoader()) {
         self.loader = loader
-        loadMenuItems()
+        if loadAychronously {
+            Task {
+                await loadAsyncMenuItems()
+            }
+        } else {
+            loadMenuItems()
+        } 
     }
     
     func loadMenuItems() {
         do {
             menuItems = try loader.load([MenuItem].self, from: "MenuList")
         } catch {
-            print("Menu loading failed: \(error)")
+            debugPrint("Menu loading failed: \(error)")
             menuItems = []
         }
     }
+    
+    func loadAsyncMenuItems() async {
+        do {
+            let menuList = try await loader.loadAsync(MenuList.self, from: "http://localhost:8000/api/menu")
+            await MainActor.run {
+                self.menuItems = menuList.items
+            }
+        } catch {
+            debugPrint("Menu loading failed: \(error)")
+            await MainActor.run {
+                self.menuItems = []
+            }
+        }
+    }
+
     
     func getMenuListBasedOnMood(mood: MoodCategory) -> [MenuItem] {
         return menuItems.filter { $0.category == mood.categoryName }
@@ -52,12 +74,6 @@ extension TabViewModel {
             items.append(water)
         }
         return items
-    }
-    
-    func averagePreprationTime(for items: [MenuItem]) -> Int {
-        guard !items.isEmpty else { return 0 }
-        let totalTime = items.reduce(0) { $0 + $1.prepTimeMinutes }
-        return totalTime / items.count
     }
     
     func incrementQuantity(for item: MenuItem) {
@@ -93,10 +109,17 @@ extension TabViewModel {
     }
 }
 
+// MARK: - Order
 extension TabViewModel {
     // This is done for demo purpose only
     var byPassAverageWaitTime: Bool {
         return true
+    }
+    
+    func averagePreprationTime(for items: [MenuItem]) -> Int {
+        guard !items.isEmpty else { return 0 }
+        let totalTime = items.reduce(0) { $0 + $1.prepTimeMinutes }
+        return totalTime / items.count
     }
     
     func confirmOrder() {
@@ -112,23 +135,4 @@ extension TabViewModel {
     func updateOrderStatus(to: OrderStatus) {
         currentOrder?.status = to
     }
-    
-    var remainingMinutes: Int {
-        guard let order = currentOrder else { return 0 }
-        let elapsed = Int(Date().timeIntervalSince(order.timestamp) / 60)
-        return max(order.estimatedWaitMinutes - elapsed, 0)
-    }
-
-    func startOrderTimer() {
-        guard let order = currentOrder else { return }
-
-        Timer.scheduledTimer(withTimeInterval: Double(order.estimatedWaitMinutes * 60), repeats: false) { _ in
-            self.updateOrderStatus(to: .ready)
-        }
-    }
-    
-    var orderStatus: OrderStatus? {
-        currentOrder?.status
-    }
-
 }
