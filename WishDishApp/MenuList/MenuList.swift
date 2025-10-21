@@ -7,6 +7,16 @@
 
 import Foundation
 
+struct MenuList: Decodable {
+    let items: [MenuItem]
+    let meta: Meta
+}
+
+struct Meta: Decodable {
+    let page: Int
+    let limit: Int
+    let total: Int
+}
 struct MenuItem: Decodable, Identifiable {
     let id: Int
     let name: String

@@ -8,6 +8,7 @@ DerivedData/
 *.xcodeproj/xcuserdata/
 *.xcuserdatad/
 
+
 # Swift Package Manager
 .swiftpm/
 Package.resolved
@@ -26,6 +27,7 @@ fastlane/screenshots/
 fastlane/test_output/
 
 # User-specific settings
+.DS_Store
 *.DS_Store
 .idea/
 .vscode/
@@ -52,3 +54,5 @@ Library/Developer/Xcode/iOS DeviceSupport/
 
 # Optional: Ignore crash reports
 *.crash
+.DS_Store
+*.xcuserstate
