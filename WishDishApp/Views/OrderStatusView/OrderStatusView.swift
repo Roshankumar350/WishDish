@@ -9,7 +9,7 @@ import SwiftUI
 import Combine
 
 struct OrderStatusView: View {
-    @ObservedObject var viewModel: RootTabViewModel
+    @ObservedObject var orderVM: OrderViewModel
     @StateObject var invoiceViewModel = InvoiceViewModel()
     @State private var remainingTime: Int = 0
     @State private var elapsedSeconds: Int = 0
@@ -20,7 +20,7 @@ struct OrderStatusView: View {
 
     var body: some View {
         VStack(spacing: 20) {
-            if let order = viewModel.currentOrder {
+            if let order = orderVM.currentOrder {
                 let subtotal = order.items.reduce(0) { $0 + Double($1.quantity) * $1.price }
 
                 Text(order.status.displayText)
@@ -65,7 +65,7 @@ struct OrderStatusView: View {
 
                 if order.status != .served {
                     Button("Mark as Served") {
-                        viewModel.updateOrderStatus(to: .served)
+                        orderVM.updateOrderStatus(to: .served)
                         showInvoiceView = true
                         selectedTab = 3
                     }
@@ -73,9 +73,9 @@ struct OrderStatusView: View {
                     .navigationDestination(isPresented: $showInvoiceView) {
                         AddInvoiceView(
                             viewModel: invoiceViewModel,
-                            RootTabViewModel: viewModel,
+                            orderVM: orderVM,
                             selectedTab: $selectedTab
-                        )
+                        ) 
                     }
                 }
             } else {
@@ -85,20 +85,20 @@ struct OrderStatusView: View {
         }
         .padding()
         .onAppear {
-            if let order = viewModel.currentOrder {
+            if let order = orderVM.currentOrder {
                 let elapsed = Int(Date().timeIntervalSince(order.timestamp))
                 elapsedSeconds = elapsed
                 remainingTime = max(order.estimatedWaitMinutes - (elapsedSeconds / 60), 0)
             }
         }
         .onReceive(timerPublisher) { _ in
-            guard let order = viewModel.currentOrder, order.status != .served else { return }
+            guard let order = orderVM.currentOrder, order.status != .served else { return }
 
             elapsedSeconds += 1
             remainingTime = max(order.estimatedWaitMinutes - (elapsedSeconds / 60), 0)
 
             if remainingTime == 0 && order.status != .ready {
-                viewModel.updateOrderStatus(to: .ready)
+                orderVM.updateOrderStatus(to: .ready)
             }
         }
         .navigationTitle("Order Status")

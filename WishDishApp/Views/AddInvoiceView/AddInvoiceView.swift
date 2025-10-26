@@ -9,7 +9,6 @@ import Foundation
 import SwiftUI
 
 struct AddInvoiceView: View {
-    
     private struct Constant {
         static let yourSelection = "Your Selection"
         static let extras = "Extras"
@@ -17,9 +16,9 @@ struct AddInvoiceView: View {
         static let addInvoice = "Add Invoice"
         static let invoiceAddedSuccessfully = "Invoice added successfully!"
     }
-    
+
     @ObservedObject var viewModel: InvoiceViewModel
-    @ObservedObject var RootTabViewModel: RootTabViewModel
+    @ObservedObject var orderVM: OrderViewModel
     @Binding var selectedTab: Int
 
     @State private var tipText: String = ""
@@ -29,11 +28,9 @@ struct AddInvoiceView: View {
 
     let emojiOptions = ["😍", "😊", "😐", "😠"]
 
-    var items: [MenuItem] {
-        RootTabViewModel.currentOrder?.items ?? []
-    }
-
     var body: some View {
+        let items = orderVM.currentOrder?.items ?? []
+
         ZStack {
             if items.isEmpty {
                 EmptyInvoiceView(selectedTab: $selectedTab)
@@ -97,14 +94,15 @@ struct AddInvoiceView: View {
     }
 
     func resetSelection() {
-        RootTabViewModel.currentOrder = nil
-        RootTabViewModel.mineralWaterQuantity = 0
-        RootTabViewModel.clearSelectedItems()
+        orderVM.currentOrder = nil
+        orderVM.mineralWaterQuantity = 0
+        orderVM.clearOrder()
         tipText = ""
         feedback = ""
         selectedEmoji = nil
     }
 }
+
 
 //MARK: - EmptyInvoiceView
 extension AddInvoiceView {

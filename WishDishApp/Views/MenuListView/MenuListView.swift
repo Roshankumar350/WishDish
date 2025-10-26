@@ -4,25 +4,25 @@
 //
 //  Created by Roshan Sah on 09/10/25.
 //
-
 import Combine
 import SwiftUI
 
 struct MenuListView: View {
-    @ObservedObject var viewModel: RootTabViewModel
+    @ObservedObject var menuVM: MenuViewModel
+    @ObservedObject var orderVM: OrderViewModel
     @ObservedObject var invoiceViewModel: InvoiceViewModel
     @Binding var selectedTab: Int
     @State var selectedMood: MoodCategory?
     @State private var showOrderStatus = false
-    
+
     struct Constant {
         static let whatsCookingForTitle = "What's Cooking for"
-        static let yourDinigMenuTitle = "Your Dining Menu"
+        static let yourDiningMenuTitle = "Your Dining Menu"
     }
 
     var filteredItems: [MenuItem] {
-        guard let mood = selectedMood else { return viewModel.menuItems }
-        return viewModel.menuItems.filter { $0.category == mood.categoryName }
+        guard let mood = selectedMood else { return menuVM.menuItems }
+        return menuVM.menuItems.filter { $0.category == mood.categoryName }
     }
 
     var groupedItems: [String: [MenuItem]] {
@@ -33,40 +33,38 @@ struct MenuListView: View {
         VStack {
             if showOrderStatus {
                 OrderStatusView(
-                    viewModel: viewModel,
+                    orderVM: orderVM,
                     invoiceViewModel: invoiceViewModel,
                     selectedTab: $selectedTab
                 )
             } else {
                 MenuListContent(
-                    viewModel: viewModel,
+                    orderVM: orderVM,
                     selectedMood: selectedMood,
                     filteredItems: filteredItems,
                     groupedItems: groupedItems
                 )
 
-                MineralWaterControls(viewModel: viewModel) {
-                    viewModel.confirmOrder()
+                MineralWaterControls(orderVM: orderVM) {
+                    orderVM.confirmOrder()
                     showOrderStatus = true
                 }
             }
         }
-        .navigationTitle(selectedMood != nil ? "\(Constant.whatsCookingForTitle) \(selectedMood!.categoryName)?" : "\(Constant.yourDinigMenuTitle)")
+        .navigationTitle(selectedMood != nil ? "\(Constant.whatsCookingForTitle) \(selectedMood!.categoryName)?" : Constant.yourDiningMenuTitle)
         .onChange(of: selectedTab) {
             showOrderStatus = false
         }
     }
 }
 
-// MARK: - VIEWS
 extension MenuListView {
-    
     struct MenuListViewConstant {
         static let extras = "Extras"
     }
-    
+
     struct MenuListContent: View {
-        let viewModel: RootTabViewModel
+        @ObservedObject var orderVM: OrderViewModel
         let selectedMood: MoodCategory?
         let filteredItems: [MenuItem]
         let groupedItems: [String: [MenuItem]]
@@ -77,17 +75,17 @@ extension MenuListView {
                     ForEach(filteredItems) { item in
                         if item.category == MenuListViewConstant.extras {
                             Section(header: Text(MenuListViewConstant.extras).sectionHeaderText()) {
-                                MenuRow(viewModel: viewModel, item: item)
+                                MenuRow(orderVM: orderVM, item: item)
                             }
                         } else {
-                            MenuRow(viewModel: viewModel, item: item)
+                            MenuRow(orderVM: orderVM, item: item)
                         }
                     }
                 } else {
                     ForEach(groupedItems.keys.sorted(), id: \.self) { category in
                         Section(header: Text(category).font(.title2).bold()) {
                             ForEach(groupedItems[category] ?? []) { item in
-                                MenuRow(viewModel: viewModel, item: item)
+                                MenuRow(orderVM: orderVM, item: item)
                             }
                         }
                     }
@@ -95,8 +93,81 @@ extension MenuListView {
             }
         }
     }
-
 }
+
+extension MenuListView {
+    struct MenuRow: View {
+        @ObservedObject var orderVM: OrderViewModel
+        let item: MenuItem
+
+        var body: some View {
+            VStack(alignment: .leading, spacing: 12) {
+                HStack(alignment: .center, spacing: 12) {
+                    MenuImageView(imageName: item.moodCategory.imageName)
+
+                    Text(item.name)
+                        .titleText()
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+
+                Text(item.description)
+                    .bodyText()
+
+                Text("₹\(item.price, specifier: "%.2f")")
+                    .priceText()
+
+                if !item.dietaryFlags.isEmpty {
+                    Text(item.dietaryFlags.joined(separator: ", "))
+                        .dietaryInfoText()
+                }
+
+                StepperView(item: item, orderVM: orderVM)
+            }
+            .padding(.vertical, 12)
+            .padding(.horizontal, 8)
+            .background(Color(.systemGray6))
+            .cornerRadius(12)
+            .shadow(color: .black.opacity(0.05), radius: 2, x: 0, y: 1)
+        }
+    }
+}
+
+
+extension MenuListView {
+    struct StepperView: View {
+        struct StepperViewConstant {
+            static let quantity = "Quantity:"
+            static let added = "Added"
+        }
+
+        let item: MenuItem
+        @ObservedObject var orderVM: OrderViewModel
+
+        var body: some View {
+            let quantity = orderVM.selectedItems.first(where: { $0.id == item.id })?.quantity ?? 0
+
+            Stepper {
+                HStack {
+                    Text("\(StepperViewConstant.quantity) \(quantity)")
+                        .font(.headline)
+
+                    if quantity > 0 {
+                        Text(StepperViewConstant.added)
+                            .captionText()
+                            .foregroundColor(.green)
+                            .transition(.opacity)
+                    }
+                }
+            } onIncrement: {
+                orderVM.incrementQuantity(for: item)
+            } onDecrement: {
+                orderVM.decrementQuantity(for: item)
+            }
+            .padding(.top, 8)
+        }
+    }
+}
+
 
 extension MenuListView {
     struct MineralWaterControls: View {
@@ -107,9 +178,8 @@ extension MenuListView {
             static let added = "Added"
             static let confirmOrder = "Confirm Order"
         }
-        
-        
-        @ObservedObject var viewModel: RootTabViewModel
+
+        @ObservedObject var orderVM: OrderViewModel
         var confirmAction: () -> Void
 
         var body: some View {
@@ -119,19 +189,19 @@ extension MenuListView {
 
                     HStack(spacing: 16) {
                         Button {
-                            viewModel.decrementMineralWater()
+                            orderVM.decrementMineralWater()
                         } label: {
                             Image(systemName: MineralWaterControlsConstant.minusCircle)
                                 .font(.title2)
                                 .foregroundColor(.red)
                         }
 
-                        Text("\(viewModel.mineralWaterQuantity)")
+                        Text("\(orderVM.mineralWaterQuantity)")
                             .font(.headline)
                             .frame(width: 32)
 
                         Button {
-                            viewModel.incrementMineralWater()
+                            orderVM.incrementMineralWater()
                         } label: {
                             Image(systemName: MineralWaterControlsConstant.plusCircle)
                                 .font(.title2)
@@ -140,7 +210,7 @@ extension MenuListView {
 
                         Spacer()
 
-                        if viewModel.mineralWaterQuantity > 0 {
+                        if orderVM.mineralWaterQuantity > 0 {
                             Text(MineralWaterControlsConstant.added)
                                 .captionText()
                                 .foregroundColor(.green)
@@ -150,7 +220,7 @@ extension MenuListView {
                 }
                 .padding(.horizontal)
 
-                if !viewModel.selectedItemsWithWater.isEmpty {
+                if !orderVM.selectedItemsWithWater.isEmpty {
                     Button(MineralWaterControlsConstant.confirmOrder) {
                         confirmAction()
                     }
@@ -161,76 +231,8 @@ extension MenuListView {
             .background(Color(.systemBackground))
         }
     }
-
 }
 
-extension MenuListView {
-    struct MenuRow: View {
-        @ObservedObject var viewModel: RootTabViewModel
-        let item: MenuItem
-        
-        var body: some View {
-            VStack(alignment: .leading, spacing: 12) {
-                HStack(alignment: .center, spacing: 12) {
-                    MenuImageView(imageName: item.moodCategory.imageName)
-                    
-                    Text(item.name)
-                        .titleText()
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                }
-                
-                Text(item.description)
-                    .bodyText()
-                
-                Text("₹\(item.price, specifier: "%.2f")")
-                    .priceText()
-                
-                if !item.dietaryFlags.isEmpty {
-                    Text(item.dietaryFlags.joined(separator: ", "))
-                        .dietaryInfoText()
-                }
-                
-                StepperView(item: item, viewModel: viewModel)
-            }
-            .padding(.vertical, 12)
-            .padding(.horizontal, 8)
-            .background(Color(.systemGray6))
-            .cornerRadius(12)
-            .shadow(color: .black.opacity(0.05), radius: 2, x: 0, y: 1)
-        }
-    }
-}
-extension MenuListView {
-    struct StepperView: View {
-        struct StepperViewConstant {
-            static let quantity = "Quantity:"
-            static let added = "Added"
-        }
-        let item: MenuItem
-        @ObservedObject var viewModel: RootTabViewModel
-        
-        var body: some View {
-            Stepper {
-                HStack {
-                    Text("\(StepperViewConstant.quantity) \(item.quantity)")
-                        .font(.headline)
-                    
-                    if item.quantity > 0 {
-                        Text(StepperViewConstant.added)
-                            .captionText()
-                            .foregroundColor(.green)
-                            .transition(.opacity)
-                    }
-                }
-            } onIncrement: {
-                viewModel.incrementQuantity(for: item)
-            } onDecrement: {
-                viewModel.decrementQuantity(for: item)
-            }
-            .padding(.top, 8)
-        }
-    }
-}
 extension MenuListView {
     struct MenuImageView: View {
         let imageName: String
@@ -246,4 +248,3 @@ extension MenuListView {
         }
     }
 }
-

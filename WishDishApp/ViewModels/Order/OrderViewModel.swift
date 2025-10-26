@@ -52,6 +52,17 @@ class OrderViewModel: ObservableObject {
         let avgTime = averagePrepTime(for: items)
         currentOrder = Order(id: UUID(), items: items, timestamp: Date(), status: .preparing, estimatedWaitMinutes: avgTime)
     }
+    
+    func updateOrderStatus(to newStatus: OrderStatus) {
+        guard var order = currentOrder else { return }
+        order.status = newStatus
+        currentOrder = order
+    }
+    
+    func quantity(for item: MenuItem) -> Int {
+        selectedItems.first(where: { $0.id == item.id })?.quantity ?? 0
+    }
+
 
     func averagePrepTime(for items: [MenuItem]) -> Int {
         guard !items.isEmpty else { return 0 }

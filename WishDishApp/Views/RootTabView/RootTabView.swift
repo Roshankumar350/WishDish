@@ -5,6 +5,13 @@
 //  Created by Roshan Sah on 12/10/25.
 //
 
+//
+//  RootTabView.swift
+//  WishDish
+//
+//  Created by Roshan Sah on 12/10/25.
+//
+
 import SwiftUI
 
 struct RootTabView: View {
@@ -18,22 +25,35 @@ struct RootTabView: View {
         static let addInvoice = "Add Invoice"
         static let addInvoiceImage = "plus.circle"
     }
-    
+
+    @StateObject var menuVM = MenuViewModel()
+    @StateObject var orderVM = OrderViewModel()
     @StateObject var invoiceVM = InvoiceViewModel()
-    @StateObject var rootTabViewModel  = RootTabViewModel()
     @State private var selectedTab = 0
     @State private var resetPathTrigger = false
 
     var body: some View {
         TabView(selection: $selectedTab) {
             NavigationStack {
-                DiningCarnivalView(viewModel: rootTabViewModel, selectedTab: $selectedTab, invoiceViewModel: invoiceVM, resetPathTrigger: $resetPathTrigger)
+                DiningCarnivalView(
+                    menuVM: menuVM,
+                    orderVM: orderVM,
+                    selectedTab: $selectedTab,
+                    invoiceViewModel: invoiceVM,
+                    resetPathTrigger: $resetPathTrigger
+                )
             }
             .tabItem { Label(Constant.mood, systemImage: Constant.moodImage) }
             .tag(0)
 
             NavigationStack {
-                MenuListView(viewModel: rootTabViewModel, invoiceViewModel: invoiceVM, selectedTab: $selectedTab, selectedMood: nil)
+                MenuListView(
+                    menuVM: menuVM,
+                    orderVM: orderVM,
+                    invoiceViewModel: invoiceVM,
+                    selectedTab: $selectedTab,
+                    selectedMood: nil
+                )
             }
             .tabItem { Label(Constant.menu, systemImage: Constant.menuImage) }
             .tag(1)
@@ -45,7 +65,11 @@ struct RootTabView: View {
             .tag(2)
 
             NavigationStack {
-                AddInvoiceView(viewModel: invoiceVM, RootTabViewModel: rootTabViewModel, selectedTab: $selectedTab)
+                AddInvoiceView(
+                    viewModel: invoiceVM,
+                    orderVM: orderVM,
+                    selectedTab: $selectedTab
+                )
             }
             .tabItem { Label(Constant.addInvoice, systemImage: Constant.addInvoiceImage) }
             .tag(3)
@@ -56,6 +80,5 @@ struct RootTabView: View {
                 resetPathTrigger.toggle()
             }
         }
-
     }
 }
