@@ -189,7 +189,9 @@ extension MenuListView {
 
                     HStack(spacing: 16) {
                         Button {
-                            orderVM.decrementMineralWater()
+                            withAnimation {
+                                orderVM.decrementMineralWater()
+                            }
                         } label: {
                             Image(systemName: MineralWaterControlsConstant.minusCircle)
                                 .font(.title2)
@@ -201,7 +203,9 @@ extension MenuListView {
                             .frame(width: 32)
 
                         Button {
-                            orderVM.incrementMineralWater()
+                            withAnimation {
+                                orderVM.incrementMineralWater()
+                            }
                         } label: {
                             Image(systemName: MineralWaterControlsConstant.plusCircle)
                                 .font(.title2)
@@ -220,18 +224,23 @@ extension MenuListView {
                 }
                 .padding(.horizontal)
 
-                if !orderVM.selectedItemsWithWater.isEmpty {
+                if !orderVM.selectedItems.isEmpty || orderVM.mineralWaterQuantity > 0 {
                     Button(MineralWaterControlsConstant.confirmOrder) {
                         confirmAction()
                     }
                     .primaryButtonStyle()
+                    .transition(.opacity.combined(with: .scale))
                 }
             }
             .padding(.vertical, 12)
             .background(Color(.systemBackground))
+            .animation(.easeInOut(duration: 0.3), value: orderVM.selectedItems.count + orderVM.mineralWaterQuantity)
         }
     }
 }
+
+
+
 
 extension MenuListView {
     struct MenuImageView: View {

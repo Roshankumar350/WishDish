@@ -2,7 +2,7 @@
 //  OrderViewModel.swift
 //  WishDish
 //
-//  Created by Nidhi Kumari on 26/10/25.
+//  Created by Roshan Sah on 26/10/25.
 //
 
 import Foundation
@@ -20,22 +20,26 @@ class OrderViewModel: ObservableObject {
     func decrementQuantity(for item: MenuItem) {
         updateItem(item, delta: -1)
     }
-
-    private func updateItem(_ item: MenuItem, delta: Int) {
-        if let index = selectedItems.firstIndex(where: { $0.id == item.id }) {
-            let updated = selectedItems[index].withUpdatedQuantity(max(0, selectedItems[index].quantity + delta))
-            selectedItems[index] = updated
-        } else if delta > 0 {
-            selectedItems.append(item.withUpdatedQuantity(delta))
-        }
-    }
-
+    
     func incrementMineralWater() {
         mineralWaterQuantity += 1
     }
 
     func decrementMineralWater() {
         mineralWaterQuantity = max(0, mineralWaterQuantity - 1)
+    }
+
+    private func updateItem(_ item: MenuItem, delta: Int) {
+        if let index = selectedItems.firstIndex(where: { $0.id == item.id }) {
+            let newQuantity = max(0, selectedItems[index].quantity + delta)
+            if newQuantity == 0 {
+                selectedItems.remove(at: index)
+            } else {
+                selectedItems[index] = selectedItems[index].withUpdatedQuantity(newQuantity)
+            }
+        } else if delta > 0 {
+            selectedItems.append(item.withUpdatedQuantity(delta))
+        }
     }
 
     var selectedItemsWithWater: [MenuItem] {
@@ -46,11 +50,27 @@ class OrderViewModel: ObservableObject {
         }
         return items
     }
+    
+    func quantity(for item: MenuItem) -> Int {
+        selectedItems.first(where: { $0.id == item.id })?.quantity ?? 0
+    }
 
+    func averagePrepTime(for items: [MenuItem]) -> Int {
+        guard !items.isEmpty else { return 0 }
+        return items.reduce(0) { $0 + $1.prepTimeMinutes } / items.count
+    }
+}
+
+extension OrderViewModel {
+    // This is done for demo purpose only
+    var byPassAverageWaitTime: Bool {
+        return true
+    }
+    
     func confirmOrder() {
         let items = selectedItemsWithWater
         let avgTime = averagePrepTime(for: items)
-        currentOrder = Order(id: UUID(), items: items, timestamp: Date(), status: .preparing, estimatedWaitMinutes: avgTime)
+        currentOrder = Order(id: UUID(), items: items, timestamp: Date(), status: .preparing, estimatedWaitMinutes: byPassAverageWaitTime ? 1 : avgTime)
     }
     
     func updateOrderStatus(to newStatus: OrderStatus) {
@@ -59,21 +79,9 @@ class OrderViewModel: ObservableObject {
         currentOrder = order
     }
     
-    func quantity(for item: MenuItem) -> Int {
-        selectedItems.first(where: { $0.id == item.id })?.quantity ?? 0
-    }
-
-
-    func averagePrepTime(for items: [MenuItem]) -> Int {
-        guard !items.isEmpty else { return 0 }
-        return items.reduce(0) { $0 + $1.prepTimeMinutes } / items.count
-    }
-
     func clearOrder() {
         selectedItems = []
         mineralWaterQuantity = 0
         currentOrder = nil
     }
 }
-
-

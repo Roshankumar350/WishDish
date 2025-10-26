@@ -2,7 +2,7 @@
 //  MenuViewModel.swift
 //  WishDish
 //
-//  Created by Nidhi Kumari on 26/10/25.
+//  Created by Roshan Sah on 26/10/25.
 //
 
 import Foundation
