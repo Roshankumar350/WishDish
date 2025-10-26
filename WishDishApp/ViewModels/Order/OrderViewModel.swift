@@ -12,6 +12,7 @@ class OrderViewModel: ObservableObject {
     @Published var currentOrder: Order?
     @Published var mineralWaterQuantity: Int = 0
     @Published var selectedItems: [MenuItem] = []
+    var menuVM: MenuViewModel? = nil
 
     func incrementQuantity(for item: MenuItem) {
         updateItem(item, delta: +1)
@@ -41,11 +42,11 @@ class OrderViewModel: ObservableObject {
             selectedItems.append(item.withUpdatedQuantity(delta))
         }
     }
-
+    
     var selectedItemsWithWater: [MenuItem] {
         var items = selectedItems
         if mineralWaterQuantity > 0,
-           let water = selectedItems.first(where: { $0.name == "Mineral Water" }) {
+           let water = menuVM?.mineralWaterItem {
             items.append(water.withUpdatedQuantity(mineralWaterQuantity))
         }
         return items

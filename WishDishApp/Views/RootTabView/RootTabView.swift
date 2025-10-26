@@ -5,13 +5,6 @@
 //  Created by Roshan Sah on 12/10/25.
 //
 
-//
-//  RootTabView.swift
-//  WishDish
-//
-//  Created by Roshan Sah on 12/10/25.
-//
-
 import SwiftUI
 
 struct RootTabView: View {
@@ -26,11 +19,21 @@ struct RootTabView: View {
         static let addInvoiceImage = "plus.circle"
     }
 
-    @StateObject var menuVM = MenuViewModel()
-    @StateObject var orderVM = OrderViewModel()
-    @StateObject var invoiceVM = InvoiceViewModel()
+    @StateObject private var menuVM: MenuViewModel
+    @StateObject private var orderVM: OrderViewModel
+    @StateObject private var invoiceVM = InvoiceViewModel()
     @State private var selectedTab = 0
     @State private var resetPathTrigger = false
+    
+    init() {
+        let menuVM = MenuViewModel()
+        let orderVM = OrderViewModel()
+        orderVM.menuVM = menuVM
+
+        _menuVM = StateObject(wrappedValue: menuVM)
+        _orderVM = StateObject(wrappedValue: orderVM)
+    }
+
 
     var body: some View {
         TabView(selection: $selectedTab) {

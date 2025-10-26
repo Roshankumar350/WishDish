@@ -50,6 +50,8 @@ struct OrderStatusView: View {
                             .customTextStyle(font: .footnote, weight: .semibold)
                     }
                 }
+                Divider()
+                    .padding(.horizontal)
 
                 VStack(spacing: 8) {
                     HStack {

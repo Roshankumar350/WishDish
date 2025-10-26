@@ -26,6 +26,11 @@ class MenuViewModel: ObservableObject {
             menuItems = []
         }
     }
+    
+    var mineralWaterItem: MenuItem? {
+        menuItems.first(where: { $0.id == 100 })
+    }
+
 
     func getMenuList(for mood: MoodCategory) -> [MenuItem] {
         menuItems.filter { $0.category == mood.categoryName }
