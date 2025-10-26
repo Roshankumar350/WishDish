@@ -36,6 +36,25 @@ struct MenuItem: Decodable, Identifiable {
         case prepTimeMinutes = "prep_time_minutes"
         case spiceLevel = "spice_level"
     }
+    
+    init(id: Int, name: String, description: String, category: String, price: Double,
+         isAvailable: Bool, isPopular: Bool, isVegetarian: Bool, imageUrl: String,
+         dietaryFlags: [String], prepTimeMinutes: Int, spiceLevel: Int, quantity: Int = 0) {
+        self.id = id
+        self.name = name
+        self.description = description
+        self.category = category
+        self.price = price
+        self.isAvailable = isAvailable
+        self.isPopular = isPopular
+        self.isVegetarian = isVegetarian
+        self.imageUrl = imageUrl
+        self.dietaryFlags = dietaryFlags
+        self.prepTimeMinutes = prepTimeMinutes
+        self.spiceLevel = spiceLevel
+        self.quantity = quantity
+    }
+
 }
 
 extension MenuItem {
@@ -43,3 +62,22 @@ extension MenuItem {
         MoodCategory(rawValue: self.category) ?? .familyDining
     }
 }
+
+extension MenuItem {
+    func withUpdatedQuantity(_ newQuantity: Int) -> MenuItem {
+        MenuItem(id: id,
+                 name: name,
+                 description: description,
+                 category: category,
+                 price: price,
+                 isAvailable: isAvailable,
+                 isPopular: isPopular,
+                 isVegetarian: isVegetarian,
+                 imageUrl: imageUrl,
+                 dietaryFlags: dietaryFlags,
+                 prepTimeMinutes: prepTimeMinutes,
+                 spiceLevel: spiceLevel,
+                 quantity: newQuantity)
+    }
+}
+
