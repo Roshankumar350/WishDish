@@ -8,8 +8,6 @@
 import Foundation
 @testable import WishDish
 
-import Foundation
-
 final class ResourceAnchor {}
 
 struct FileBasedMockLoader: ClientResourceLoading {
