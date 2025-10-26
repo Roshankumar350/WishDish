@@ -1,5 +1,5 @@
 //
-//  MoodView.swift
+//  DiningCarnivalView.swift
 //  WishDish
 //
 //  Created by Roshan Sah on 09/10/25.
@@ -12,7 +12,8 @@ struct DiningCarnivalView: View {
         static let diningCarnival = "Dining Carnival"
         static let browseMood = "Browse our curated mood boards"
     }
-    @ObservedObject var viewModel: TabViewModel
+    @ObservedObject var menuVM: MenuViewModel
+    @ObservedObject var orderVM: OrderViewModel
     @Binding var selectedTab: Int
     @ObservedObject var invoiceViewModel: InvoiceViewModel
     @State private var path = NavigationPath()
@@ -31,7 +32,7 @@ struct DiningCarnivalView: View {
                         .sectionHeaderStyle()
 
                     LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
-                        ForEach(viewModel.moodlist, id: \.self) { mood in
+                        ForEach(menuVM.moodlist, id: \.self) { mood in
                             NavigationLink(value: mood) {
                                 MoodTileView(mood: mood)
                             }
@@ -45,11 +46,13 @@ struct DiningCarnivalView: View {
             }
             .navigationDestination(for: MoodCategory.self) { mood in
                 MenuListView(
-                    viewModel: viewModel,
+                    menuVM: menuVM,
+                    orderVM: orderVM,
                     invoiceViewModel: invoiceViewModel,
                     selectedTab: $selectedTab,
                     selectedMood: mood
                 )
+
             }
         }
         .onChange(of: selectedTab) {

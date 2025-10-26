@@ -48,5 +48,15 @@ final class InvoiceViewModelTests: XCTestCase {
         XCTAssertEqual(invoice.cgst, expectedTax, accuracy: 0.01)
         XCTAssertEqual(invoice.subtotal, invoice.totalAmount - invoice.tip - invoice.sgst - invoice.cgst, accuracy: 0.01)
     }
+    
+    func testInvoiceIncludesMineralWater() {
+        let items = [
+            MenuItem(id: 100, name: "Mineral Water", description: "500ml", category: "Extras", price: 30, isAvailable: true, isPopular: false, isVegetarian: true, imageUrl: "", dietaryFlags: [], prepTimeMinutes: 0, spiceLevel: 0, quantity: 2)
+        ]
+        viewModel.createInvoice(from: items, tipText: "10", feedback: "", emoji: nil)
+        let invoice = viewModel.invoices.first!
+        XCTAssertEqual(invoice.totalAmount, 70.0)
+    }
+
 }
 

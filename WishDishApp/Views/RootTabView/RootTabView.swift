@@ -1,5 +1,5 @@
 //
-//  TabView.swift
+//  RootTabView.swift
 //  WishDish
 //
 //  Created by Roshan Sah on 12/10/25.
@@ -18,22 +18,45 @@ struct RootTabView: View {
         static let addInvoice = "Add Invoice"
         static let addInvoiceImage = "plus.circle"
     }
-    
-    @StateObject var invoiceVM = InvoiceViewModel()
-    @StateObject var tabViewModel  = TabViewModel()
+
+    @StateObject private var menuVM: MenuViewModel
+    @StateObject private var orderVM: OrderViewModel
+    @StateObject private var invoiceVM = InvoiceViewModel()
     @State private var selectedTab = 0
     @State private var resetPathTrigger = false
+    
+    init() {
+        let menuVM = MenuViewModel()
+        let orderVM = OrderViewModel()
+        orderVM.menuVM = menuVM
+
+        _menuVM = StateObject(wrappedValue: menuVM)
+        _orderVM = StateObject(wrappedValue: orderVM)
+    }
+
 
     var body: some View {
         TabView(selection: $selectedTab) {
             NavigationStack {
-                DiningCarnivalView(viewModel: tabViewModel, selectedTab: $selectedTab, invoiceViewModel: invoiceVM, resetPathTrigger: $resetPathTrigger)
+                DiningCarnivalView(
+                    menuVM: menuVM,
+                    orderVM: orderVM,
+                    selectedTab: $selectedTab,
+                    invoiceViewModel: invoiceVM,
+                    resetPathTrigger: $resetPathTrigger
+                )
             }
             .tabItem { Label(Constant.mood, systemImage: Constant.moodImage) }
             .tag(0)
 
             NavigationStack {
-                MenuListView(viewModel: tabViewModel, invoiceViewModel: invoiceVM, selectedTab: $selectedTab, selectedMood: nil)
+                MenuListView(
+                    menuVM: menuVM,
+                    orderVM: orderVM,
+                    invoiceViewModel: invoiceVM,
+                    selectedTab: $selectedTab,
+                    selectedMood: nil
+                )
             }
             .tabItem { Label(Constant.menu, systemImage: Constant.menuImage) }
             .tag(1)
@@ -45,7 +68,11 @@ struct RootTabView: View {
             .tag(2)
 
             NavigationStack {
-                AddInvoiceView(viewModel: invoiceVM, tabViewModel: tabViewModel, selectedTab: $selectedTab)
+                AddInvoiceView(
+                    viewModel: invoiceVM,
+                    orderVM: orderVM,
+                    selectedTab: $selectedTab
+                )
             }
             .tabItem { Label(Constant.addInvoice, systemImage: Constant.addInvoiceImage) }
             .tag(3)
@@ -56,6 +83,5 @@ struct RootTabView: View {
                 resetPathTrigger.toggle()
             }
         }
-
     }
 }
