@@ -1,5 +1,5 @@
 //
-//  TabView.swift
+//  RootTabView.swift
 //  WishDish
 //
 //  Created by Roshan Sah on 12/10/25.
@@ -20,20 +20,20 @@ struct RootTabView: View {
     }
     
     @StateObject var invoiceVM = InvoiceViewModel()
-    @StateObject var tabViewModel  = TabViewModel()
+    @StateObject var rootTabViewModel  = RootTabViewModel()
     @State private var selectedTab = 0
     @State private var resetPathTrigger = false
 
     var body: some View {
         TabView(selection: $selectedTab) {
             NavigationStack {
-                DiningCarnivalView(viewModel: tabViewModel, selectedTab: $selectedTab, invoiceViewModel: invoiceVM, resetPathTrigger: $resetPathTrigger)
+                DiningCarnivalView(viewModel: rootTabViewModel, selectedTab: $selectedTab, invoiceViewModel: invoiceVM, resetPathTrigger: $resetPathTrigger)
             }
             .tabItem { Label(Constant.mood, systemImage: Constant.moodImage) }
             .tag(0)
 
             NavigationStack {
-                MenuListView(viewModel: tabViewModel, invoiceViewModel: invoiceVM, selectedTab: $selectedTab, selectedMood: nil)
+                MenuListView(viewModel: rootTabViewModel, invoiceViewModel: invoiceVM, selectedTab: $selectedTab, selectedMood: nil)
             }
             .tabItem { Label(Constant.menu, systemImage: Constant.menuImage) }
             .tag(1)
@@ -45,7 +45,7 @@ struct RootTabView: View {
             .tag(2)
 
             NavigationStack {
-                AddInvoiceView(viewModel: invoiceVM, tabViewModel: tabViewModel, selectedTab: $selectedTab)
+                AddInvoiceView(viewModel: invoiceVM, RootTabViewModel: rootTabViewModel, selectedTab: $selectedTab)
             }
             .tabItem { Label(Constant.addInvoice, systemImage: Constant.addInvoiceImage) }
             .tag(3)

@@ -1,5 +1,5 @@
 //
-//  MoodView.swift
+//  DiningCarnivalView.swift
 //  WishDish
 //
 //  Created by Roshan Sah on 09/10/25.
@@ -12,7 +12,7 @@ struct DiningCarnivalView: View {
         static let diningCarnival = "Dining Carnival"
         static let browseMood = "Browse our curated mood boards"
     }
-    @ObservedObject var viewModel: TabViewModel
+    @ObservedObject var viewModel: RootTabViewModel
     @Binding var selectedTab: Int
     @ObservedObject var invoiceViewModel: InvoiceViewModel
     @State private var path = NavigationPath()

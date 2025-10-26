@@ -1,5 +1,5 @@
 //
-//  TabViewModel.swift
+//  RootTabViewModel.swift
 //  WishDish
 //
 //  Created by Roshan Sah on 12/10/25.
@@ -9,7 +9,7 @@ import Combine
 import Foundation
 
 
-class TabViewModel: ObservableObject {
+class RootTabViewModel: ObservableObject {
     @Published var menuItems: [MenuItem] = []
     private(set) var moodlist: [MoodCategory] = MoodCategory.allCases
     @Published var currentOrder: Order?
@@ -35,7 +35,7 @@ class TabViewModel: ObservableObject {
     }
 }
 
-extension TabViewModel {
+extension RootTabViewModel {
     var groupedByCategory: [String: [MenuItem]] {
         Dictionary(grouping: menuItems, by: { $0.category })
     }
@@ -93,7 +93,7 @@ extension TabViewModel {
     }
 }
 
-extension TabViewModel {
+extension RootTabViewModel {
     // This is done for demo purpose only
     var byPassAverageWaitTime: Bool {
         return true

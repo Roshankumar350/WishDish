@@ -9,7 +9,7 @@ import Combine
 import SwiftUI
 
 struct MenuListView: View {
-    @ObservedObject var viewModel: TabViewModel
+    @ObservedObject var viewModel: RootTabViewModel
     @ObservedObject var invoiceViewModel: InvoiceViewModel
     @Binding var selectedTab: Int
     @State var selectedMood: MoodCategory?
@@ -66,7 +66,7 @@ extension MenuListView {
     }
     
     struct MenuListContent: View {
-        let viewModel: TabViewModel
+        let viewModel: RootTabViewModel
         let selectedMood: MoodCategory?
         let filteredItems: [MenuItem]
         let groupedItems: [String: [MenuItem]]
@@ -109,7 +109,7 @@ extension MenuListView {
         }
         
         
-        @ObservedObject var viewModel: TabViewModel
+        @ObservedObject var viewModel: RootTabViewModel
         var confirmAction: () -> Void
 
         var body: some View {
@@ -166,7 +166,7 @@ extension MenuListView {
 
 extension MenuListView {
     struct MenuRow: View {
-        @ObservedObject var viewModel: TabViewModel
+        @ObservedObject var viewModel: RootTabViewModel
         let item: MenuItem
         
         var body: some View {
@@ -207,7 +207,7 @@ extension MenuListView {
             static let added = "Added"
         }
         let item: MenuItem
-        @ObservedObject var viewModel: TabViewModel
+        @ObservedObject var viewModel: RootTabViewModel
         
         var body: some View {
             Stepper {

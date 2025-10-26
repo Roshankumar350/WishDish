@@ -1,5 +1,5 @@
 //
-//  TabViewModelTests.swift
+//  RootTabViewModelTests.swift
 //  WishDishTests
 //
 //  Created by Roshan Sah on 20/10/25.
@@ -8,12 +8,12 @@
 import XCTest
 @testable import WishDish
 
-final class TabViewModelTests: XCTestCase {
-    var viewModel: TabViewModel!
+final class RootTabViewModelTests: XCTestCase {
+    var viewModel: RootTabViewModel!
 
     override func setUp() {
         super.setUp()
-        viewModel = TabViewModel()
+        viewModel = RootTabViewModel()
         viewModel.menuItems = [
             MenuItem(id: 1, name: "Pasta", description: "Creamy", category: "Family Dining", price: 150, isAvailable: true, isPopular: true, isVegetarian: true, imageUrl: "", dietaryFlags: [], prepTimeMinutes: 10, spiceLevel: 1),
             MenuItem(id: 2, name: "Mineral Water", description: "Bottled", category: "Extras", price: 30, isAvailable: true, isPopular: false, isVegetarian: true, imageUrl: "", dietaryFlags: [], prepTimeMinutes: 0, spiceLevel: 0)

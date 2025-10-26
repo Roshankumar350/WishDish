@@ -19,7 +19,7 @@ struct AddInvoiceView: View {
     }
     
     @ObservedObject var viewModel: InvoiceViewModel
-    @ObservedObject var tabViewModel: TabViewModel
+    @ObservedObject var RootTabViewModel: RootTabViewModel
     @Binding var selectedTab: Int
 
     @State private var tipText: String = ""
@@ -30,7 +30,7 @@ struct AddInvoiceView: View {
     let emojiOptions = ["😍", "😊", "😐", "😠"]
 
     var items: [MenuItem] {
-        tabViewModel.currentOrder?.items ?? []
+        RootTabViewModel.currentOrder?.items ?? []
     }
 
     var body: some View {
@@ -97,9 +97,9 @@ struct AddInvoiceView: View {
     }
 
     func resetSelection() {
-        tabViewModel.currentOrder = nil
-        tabViewModel.mineralWaterQuantity = 0
-        tabViewModel.clearSelectedItems()
+        RootTabViewModel.currentOrder = nil
+        RootTabViewModel.mineralWaterQuantity = 0
+        RootTabViewModel.clearSelectedItems()
         tipText = ""
         feedback = ""
         selectedEmoji = nil

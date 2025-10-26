@@ -9,7 +9,7 @@ import SwiftUI
 import Combine
 
 struct OrderStatusView: View {
-    @ObservedObject var viewModel: TabViewModel
+    @ObservedObject var viewModel: RootTabViewModel
     @StateObject var invoiceViewModel = InvoiceViewModel()
     @State private var remainingTime: Int = 0
     @State private var elapsedSeconds: Int = 0
@@ -73,7 +73,7 @@ struct OrderStatusView: View {
                     .navigationDestination(isPresented: $showInvoiceView) {
                         AddInvoiceView(
                             viewModel: invoiceViewModel,
-                            tabViewModel: viewModel,
+                            RootTabViewModel: viewModel,
                             selectedTab: $selectedTab
                         )
                     }
