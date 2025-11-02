@@ -11,12 +11,8 @@ import Combine
 struct OrderStatusView: View {
     @ObservedObject var orderVM: OrderViewModel
     @StateObject var invoiceViewModel = InvoiceViewModel()
-    @State private var remainingTime: Int = 0
-    @State private var elapsedSeconds: Int = 0
     @State private var showInvoiceView = false
     @Binding var selectedTab: Int
-
-    private let timerPublisher = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
     var body: some View {
         VStack(spacing: 20) {
@@ -32,11 +28,11 @@ struct OrderStatusView: View {
                     .frame(width: 60, height: 60)
                     .foregroundColor(.blue)
 
-                Text("Estimated wait: \(remainingTime) min")
+                Text("Estimated wait: \(orderVM.remainingTime) min")
                     .customTextStyle(font: .headline, color: .secondary)
 
                 let totalWaitSeconds = max(order.estimatedWaitMinutes * 60, 1)
-                let progressFraction = Double(elapsedSeconds) / Double(totalWaitSeconds)
+                let progressFraction = Double(orderVM.elapsedSeconds) / Double(totalWaitSeconds)
 
                 ProgressView(value: min(progressFraction, 1.0))
                     .progressViewStyle(LinearProgressViewStyle(tint: .green))
@@ -87,21 +83,10 @@ struct OrderStatusView: View {
         }
         .padding()
         .onAppear {
-            if let order = orderVM.currentOrder {
-                let elapsed = Int(Date().timeIntervalSince(order.timestamp))
-                elapsedSeconds = elapsed
-                remainingTime = max(order.estimatedWaitMinutes - (elapsedSeconds / 60), 0)
-            }
+            orderVM.startTimer()
         }
-        .onReceive(timerPublisher) { _ in
-            guard let order = orderVM.currentOrder, order.status != .served else { return }
-
-            elapsedSeconds += 1
-            remainingTime = max(order.estimatedWaitMinutes - (elapsedSeconds / 60), 0)
-
-            if remainingTime == 0 && order.status != .ready {
-                orderVM.updateOrderStatus(to: .ready)
-            }
+        .onDisappear {
+            orderVM.resetTimerAndAssociatedValues()
         }
         .navigationTitle("Order Status")
     }
