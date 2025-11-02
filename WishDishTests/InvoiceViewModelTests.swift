@@ -10,13 +10,13 @@ import XCTest
 
 final class InvoiceViewModelTests: XCTestCase {
     var viewModel: InvoiceViewModel!
-    var sampleItems: [MenuItem]!
+    var sampleItems: [MenuList.MenuItem]!
 
     override func setUp() {
         super.setUp()
         viewModel = InvoiceViewModel()
         sampleItems = [
-            MenuItem(id: 1, name: "Pizza", description: "Cheesy", category: "Family Dining", price: 250, isAvailable: true, isPopular: true, isVegetarian: true, imageUrl: "", dietaryFlags: [], prepTimeMinutes: 10, spiceLevel: 1, quantity: 2)
+            MenuList.MenuItem(id: 1, name: "Pizza", description: "Cheesy", category: "Family Dining", price: 250, isAvailable: true, isPopular: true, isVegetarian: true, imageUrl: "", dietaryFlags: [], prepTimeMinutes: 10, spiceLevel: 1, quantity: 2)
         ]
     }
 
@@ -51,7 +51,7 @@ final class InvoiceViewModelTests: XCTestCase {
     
     func testInvoiceIncludesMineralWater() {
         let items = [
-            MenuItem(id: 100, name: "Mineral Water", description: "500ml", category: "Extras", price: 30, isAvailable: true, isPopular: false, isVegetarian: true, imageUrl: "", dietaryFlags: [], prepTimeMinutes: 0, spiceLevel: 0, quantity: 2)
+            MenuList.MenuItem(id: 100, name: "Mineral Water", description: "500ml", category: "Extras", price: 30, isAvailable: true, isPopular: false, isVegetarian: true, imageUrl: "", dietaryFlags: [], prepTimeMinutes: 0, spiceLevel: 0, quantity: 2)
         ]
         viewModel.createInvoice(from: items, tipText: "10", feedback: "", emoji: nil)
         let invoice = viewModel.invoices.first!

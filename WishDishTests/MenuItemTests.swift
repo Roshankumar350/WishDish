@@ -10,7 +10,7 @@ import XCTest
 
 final class MenuItemTests: XCTestCase {
     func testMoodCategoryMapping() {
-        let item = MenuItem(
+        let item = MenuList.MenuItem(
             id: 1,
             name: "Paneer Tikka",
             description: "Spicy grilled paneer",

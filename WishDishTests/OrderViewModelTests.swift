@@ -15,8 +15,8 @@ final class OrderViewModelTests: XCTestCase {
     override func setUp() {
         super.setUp()
         menuVM = MenuViewModel(loader: MockLoader(menuItems: [
-            MenuItem(id: 100, name: "Mineral Water", description: "500ml", category: "Extras", price: 30, isAvailable: true, isPopular: false, isVegetarian: true, imageUrl: "", dietaryFlags: [], prepTimeMinutes: 0, spiceLevel: 0),
-            MenuItem(id: 1, name: "Pizza", description: "Cheesy", category: "Family Dining", price: 250, isAvailable: true, isPopular: true, isVegetarian: true, imageUrl: "", dietaryFlags: [], prepTimeMinutes: 10, spiceLevel: 1)
+            MenuList.MenuItem(id: 100, name: "Mineral Water", description: "500ml", category: "Extras", price: 30, isAvailable: true, isPopular: false, isVegetarian: true, imageUrl: "", dietaryFlags: [], prepTimeMinutes: 0, spiceLevel: 0),
+            MenuList.MenuItem(id: 1, name: "Pizza", description: "Cheesy", category: "Family Dining", price: 250, isAvailable: true, isPopular: true, isVegetarian: true, imageUrl: "", dietaryFlags: [], prepTimeMinutes: 10, spiceLevel: 1)
         ]))
         orderVM = OrderViewModel()
         orderVM.menuVM = menuVM
