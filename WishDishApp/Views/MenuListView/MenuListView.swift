@@ -4,6 +4,7 @@
 //
 //  Created by Roshan Sah on 09/10/25.
 //
+
 import Combine
 import SwiftUI
 
@@ -20,15 +21,6 @@ struct MenuListView: View {
         static let yourDiningMenuTitle = "Your Dining Menu"
     }
 
-    var filteredItems: [MenuItem] {
-        guard let mood = selectedMood else { return menuVM.menuItems }
-        return menuVM.menuItems.filter { $0.category == mood.categoryName }
-    }
-
-    var groupedItems: [String: [MenuItem]] {
-        Dictionary(grouping: filteredItems, by: { $0.category })
-    }
-
     var body: some View {
         VStack {
             if showOrderStatus {
@@ -37,12 +29,13 @@ struct MenuListView: View {
                     invoiceViewModel: invoiceViewModel,
                     selectedTab: $selectedTab
                 )
+                .navigationBarBackButtonHidden(true)
             } else {
                 MenuListContent(
                     orderVM: orderVM,
                     selectedMood: selectedMood,
-                    filteredItems: filteredItems,
-                    groupedItems: groupedItems
+                    filteredItems: menuVM.getMoodBasedMenuItems(for: selectedMood),
+                    groupedItems: menuVM.getGroupedMenuItems(for: selectedMood)
                 )
 
                 MineralWaterControls(orderVM: orderVM) {
