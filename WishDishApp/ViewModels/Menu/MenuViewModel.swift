@@ -31,13 +31,17 @@ class MenuViewModel: ObservableObject {
         menuItems.first(where: { $0.id == 100 })
     }
 
-
     func getMenuList(for mood: MoodCategory) -> [MenuItem] {
         menuItems.filter { $0.category == mood.categoryName }
     }
-
-    var groupedByCategory: [String: [MenuItem]] {
-        Dictionary(grouping: menuItems, by: { $0.category })
+    
+    func getMoodBasedMenuItems(for selectedMood: MoodCategory?) -> [MenuItem] {
+        guard let mood = selectedMood else { return menuItems }
+        return menuItems.filter { $0.category == mood.categoryName }
+    }
+    
+    func getGroupedMenuItems(for selectedMood: MoodCategory?) -> [String: [MenuItem]] {
+        return Dictionary(grouping: getMoodBasedMenuItems(for: selectedMood), by: { $0.category })
     }
 }
 
