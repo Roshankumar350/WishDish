@@ -9,16 +9,22 @@ import SwiftUI
 import Combine
 
 struct OrderStatusView: View {
+    struct Constant {
+        static let totalAmout = "Total Amount"
+        static let markedServed = "Mark as Served"
+        static let noActiveOrder = "No active order"
+        static let orderStatus = "Order Status"
+        static let estimatedWait = "Estimated wait:"
+    }
+    
     @ObservedObject var orderVM: OrderViewModel
     @StateObject var invoiceViewModel = InvoiceViewModel()
     @State private var showInvoiceView = false
     @Binding var selectedTab: Int
-
+    
     var body: some View {
         VStack(spacing: 20) {
             if let order = orderVM.currentOrder {
-                let subtotal = order.items.reduce(0) { $0 + Double($1.quantity) * $1.price }
-
                 Text(order.status.displayText)
                     .customTextStyle(font: .title, weight: .bold)
 
@@ -28,13 +34,10 @@ struct OrderStatusView: View {
                     .frame(width: 60, height: 60)
                     .foregroundColor(.blue)
 
-                Text("Estimated wait: \(orderVM.remainingTime) min")
+                Text("\(Constant.estimatedWait) \(orderVM.remainingTime) min")
                     .customTextStyle(font: .headline, color: .secondary)
 
-                let totalWaitSeconds = max(order.estimatedWaitMinutes * 60, 1)
-                let progressFraction = Double(orderVM.elapsedSeconds) / Double(totalWaitSeconds)
-
-                ProgressView(value: min(progressFraction, 1.0))
+                ProgressView(value: orderVM.progressFraction)
                     .progressViewStyle(LinearProgressViewStyle(tint: .green))
                     .padding(.horizontal)
 
@@ -51,10 +54,10 @@ struct OrderStatusView: View {
 
                 VStack(spacing: 8) {
                     HStack {
-                        Text("Total Amount")
+                        Text(Constant.totalAmout)
                             .font(.headline)
                         Spacer()
-                        Text("₹\(subtotal, specifier: "%.2f")")
+                        Text("₹\(orderVM.subtotal, specifier: "%.2f")")
                             .font(.headline)
                             .bold()
                     }
@@ -62,7 +65,7 @@ struct OrderStatusView: View {
                 .padding(.horizontal)
 
                 if order.status != .served {
-                    Button("Mark as Served") {
+                    Button(Constant.markedServed) {
                         orderVM.updateOrderStatus(to: .served)
                         showInvoiceView = true
                         selectedTab = 3
@@ -77,7 +80,7 @@ struct OrderStatusView: View {
                     }
                 }
             } else {
-                Text("No active order")
+                Text(Constant.noActiveOrder)
                     .customTextStyle(font: .title2, color: .gray)
             }
         }
@@ -88,6 +91,6 @@ struct OrderStatusView: View {
         .onDisappear {
             orderVM.resetTimerAndAssociatedValues()
         }
-        .navigationTitle("Order Status")
+        .navigationTitle(Constant.orderStatus)
     }
 }
