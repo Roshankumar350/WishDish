@@ -9,10 +9,10 @@ import Combine
 import Foundation
 
 class MenuListViewModel {
-    @Published var menuItems: [MenuItem]
+    @Published var menuItems: [MenuList.MenuItem]
     var selectedMood: MoodCategory?
 
-    init(menuItems: [MenuItem], selectedMood: MoodCategory? = nil) {
+    init(menuItems: [MenuList.MenuItem], selectedMood: MoodCategory? = nil) {
         self.menuItems = menuItems
         self.selectedMood = selectedMood
     }
@@ -22,11 +22,11 @@ class MenuListViewModel {
         return true
     }
 
-    var selectedMoodItems: [MenuItem] {
+    var selectedMoodItems: [MenuList.MenuItem] {
         menuItems
     }
 
-    var groupedByCategory: [String: [MenuItem]] {
+    var groupedByCategory: [String: [MenuList.MenuItem]] {
         Dictionary(grouping: menuItems, by: { $0.category })
     }
 }

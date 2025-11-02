@@ -15,7 +15,7 @@ class InvoiceViewModel: ObservableObject {
         invoices.append(invoice)
     }
 
-    func createInvoice(from items: [MenuItem], tipText: String, feedback: String, emoji: String?) {
+    func createInvoice(from items: [MenuList.MenuItem], tipText: String, feedback: String, emoji: String?) {
         let tip = Double(tipText) ?? 0
         let total = items.reduce(0) { $0 + Double($1.quantity) * $1.price }
 

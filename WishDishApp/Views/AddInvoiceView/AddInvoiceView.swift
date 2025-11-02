@@ -164,7 +164,7 @@ extension AddInvoiceView {
 //MARK: - InvoiceItemCard
 extension AddInvoiceView {
     struct InvoiceItemCard: View {
-        let item: MenuItem
+        let item: MenuList.MenuItem
 
         var body: some View {
             HStack {

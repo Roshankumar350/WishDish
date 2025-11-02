@@ -10,7 +10,7 @@ import Foundation
 struct Invoice: Identifiable {
     let id: UUID
     let date: Date
-    let items: [MenuItem]
+    let items: [MenuList.MenuItem]
     let totalAmount: Double
     let tip: Double
     let feedback: String?
