@@ -11,7 +11,7 @@ import Combine
 class OrderViewModel: ObservableObject {
     @Published var currentOrder: Order?
     @Published var mineralWaterQuantity: Int = 0
-    @Published var selectedItems: [MenuItem] = []
+    @Published var selectedItems: [MenuList.MenuItem] = []
     @Published var elapsedSeconds: Int = 0
     @Published var remainingTime: Int = 0
 
@@ -19,11 +19,11 @@ class OrderViewModel: ObservableObject {
     
     var menuVM: MenuViewModel? = nil
 
-    func incrementQuantity(for item: MenuItem) {
+    func incrementQuantity(for item: MenuList.MenuItem) {
         updateItem(item, delta: +1)
     }
 
-    func decrementQuantity(for item: MenuItem) {
+    func decrementQuantity(for item: MenuList.MenuItem) {
         updateItem(item, delta: -1)
     }
     
@@ -35,7 +35,7 @@ class OrderViewModel: ObservableObject {
         mineralWaterQuantity = max(0, mineralWaterQuantity - 1)
     }
 
-    private func updateItem(_ item: MenuItem, delta: Int) {
+    private func updateItem(_ item: MenuList.MenuItem, delta: Int) {
         if let index = selectedItems.firstIndex(where: { $0.id == item.id }) {
             let newQuantity = max(0, selectedItems[index].quantity + delta)
             if newQuantity == 0 {
@@ -48,7 +48,7 @@ class OrderViewModel: ObservableObject {
         }
     }
     
-    func quantity(for item: MenuItem) -> Int {
+    func quantity(for item: MenuList.MenuItem) -> Int {
         selectedItems.first(where: { $0.id == item.id })?.quantity ?? 0
     }
     
@@ -59,17 +59,12 @@ class OrderViewModel: ObservableObject {
 }
 
 // MARK: - Orders Behaviour
-extension OrderViewModel {
-    // This is done for demo purpose only
-    var byPassAverageWaitTime: Bool {
-        return true
-    }
-    
+extension OrderViewModel {    
     var subtotal: Double {
         currentOrder?.items.reduce(0) { $0 + Double($1.quantity) * $1.price } ?? 0
     }
 
-    var selectedItemsWithWater: [MenuItem] {
+    var selectedItemsWithWater: [MenuList.MenuItem] {
         var items = selectedItems
         if mineralWaterQuantity > 0,
            let water = menuVM?.mineralWaterItem {
@@ -97,7 +92,7 @@ extension OrderViewModel {
         resetTimerAndAssociatedValues()
     }
     
-    func averagePrepTime(for items: [MenuItem]) -> Int {
+    func averagePrepTime(for items: [MenuList.MenuItem]) -> Int {
         guard !items.isEmpty else { return 0 }
         return items.reduce(0) { $0 + $1.prepTimeMinutes } / items.count
     }

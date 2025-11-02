@@ -59,8 +59,8 @@ extension MenuListView {
     struct MenuListContent: View {
         @ObservedObject var orderVM: OrderViewModel
         let selectedMood: MoodCategory?
-        let filteredItems: [MenuItem]
-        let groupedItems: [String: [MenuItem]]
+        let filteredItems: [MenuList.MenuItem]
+        let groupedItems: [String: [MenuList.MenuItem]]
 
         var body: some View {
             List {
@@ -91,7 +91,7 @@ extension MenuListView {
 extension MenuListView {
     struct MenuRow: View {
         @ObservedObject var orderVM: OrderViewModel
-        let item: MenuItem
+        let item: MenuList.MenuItem
 
         var body: some View {
             VStack(alignment: .leading, spacing: 12) {
@@ -133,7 +133,7 @@ extension MenuListView {
             static let added = "Added"
         }
 
-        let item: MenuItem
+        let item: MenuList.MenuItem
         @ObservedObject var orderVM: OrderViewModel
 
         var body: some View {

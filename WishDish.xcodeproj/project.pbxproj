@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		702E41B52EB7AE7600664654 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702E41B42EB7AE7600664654 /* Settings.swift */; };
 		70D085032EAE1544005FAA78 /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D085022EAE1544005FAA78 /* MenuViewModel.swift */; };
 		70D085052EAE1740005FAA78 /* OrderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D085042EAE1740005FAA78 /* OrderViewModel.swift */; };
 		70FC87902EA64F9C00D6BF9F /* Requirement.md in Resources */ = {isa = PBXBuildFile; fileRef = 70FC878D2EA64F9C00D6BF9F /* Requirement.md */; };
@@ -51,6 +52,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		702E41B42EB7AE7600664654 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		70D085022EAE1544005FAA78 /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
 		70D085042EAE1740005FAA78 /* OrderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewModel.swift; sourceTree = "<group>"; };
 		70FC876E2EA64F9C00D6BF9F /* AddInvoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddInvoiceView.swift; sourceTree = "<group>"; };
@@ -264,6 +266,7 @@
 				70FC87862EA64F9C00D6BF9F /* Character+Extension.swift */,
 				70FC87872EA64F9C00D6BF9F /* View+Extension.swift */,
 				70FC87882EA64F9C00D6BF9F /* ViewModifiers.swift */,
+				702E41B42EB7AE7600664654 /* Settings.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -468,6 +471,7 @@
 				70FC87A32EA64F9C00D6BF9F /* MenuListViewModel.swift in Sources */,
 				70FC87A42EA64F9C00D6BF9F /* DiningCarnivalView.swift in Sources */,
 				70FC87A52EA64F9C00D6BF9F /* OrderStatusView.swift in Sources */,
+				702E41B52EB7AE7600664654 /* Settings.swift in Sources */,
 				70FC87A62EA64F9C00D6BF9F /* ClientResourceLoader.swift in Sources */,
 				70FC87A72EA64F9C00D6BF9F /* Character+Extension.swift in Sources */,
 			);

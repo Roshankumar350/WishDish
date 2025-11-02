@@ -156,7 +156,7 @@ extension InvoiceListView {
     }
     
     struct CellView: View {
-        let item: MenuItem
+        let item: MenuList.MenuItem
         var body: some View {
             HStack {
                 Text("\(item.name) x \(item.quantity)")
