@@ -15,7 +15,13 @@ class MenuViewModel: ObservableObject {
 
     init(loader: ClientResourceLoading = ClientResourceLoader()) {
         self.loader = loader
-        loadMenuItems()
+        if loadAychronously {
+            Task {
+                await loadAsyncMenuItems()
+            }
+        } else {
+            loadMenuItems()
+        }
     }
 
     func loadMenuItems() {
@@ -26,6 +32,20 @@ class MenuViewModel: ObservableObject {
             menuItems = []
         }
     }
+    
+    func loadAsyncMenuItems() async {
+            do {
+                let menuList = try await loader.loadAsync(MenuList.self, from: "http://localhost:8000/api/menu")
+                await MainActor.run {
+                    self.menuItems = menuList.items
+                }
+            } catch {
+                debugPrint("Menu loading failed: \(error)")
+                await MainActor.run {
+                    self.menuItems = []
+                }
+            }
+        }
     
     var mineralWaterItem: MenuList.MenuItem? {
         menuItems.first(where: { $0.id == 100 })

@@ -59,12 +59,7 @@ class OrderViewModel: ObservableObject {
 }
 
 // MARK: - Orders Behaviour
-extension OrderViewModel {
-    // This is done for demo purpose only
-    var byPassAverageWaitTime: Bool {
-        return true
-    }
-    
+extension OrderViewModel {    
     var subtotal: Double {
         currentOrder?.items.reduce(0) { $0 + Double($1.quantity) * $1.price } ?? 0
     }
