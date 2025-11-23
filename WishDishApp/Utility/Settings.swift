@@ -2,7 +2,7 @@
 //  Settings.swift
 //  WishDish
 //
-//  Created by Nidhi Kumari on 02/11/25.
+//  Created by Roshan Sah on 02/11/25.
 //
 
 import Foundation

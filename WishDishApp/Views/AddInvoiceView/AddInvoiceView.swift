@@ -94,8 +94,6 @@ struct AddInvoiceView: View {
     }
 
     func resetSelection() {
-        orderVM.currentOrder = nil
-        orderVM.mineralWaterQuantity = 0
         orderVM.clearOrder()
         tipText = ""
         feedback = ""

@@ -28,7 +28,7 @@ struct RootTabView: View {
     init() {
         let menuVM = MenuViewModel()
         let orderVM = OrderViewModel()
-        orderVM.menuVM = menuVM
+        orderVM.setMenuViewModel(menuVM)
 
         _menuVM = StateObject(wrappedValue: menuVM)
         _orderVM = StateObject(wrappedValue: orderVM)

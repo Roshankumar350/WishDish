@@ -8,13 +8,19 @@
 import Combine
 import Foundation
 
-class InvoiceViewModel: ObservableObject {
+final class InvoiceViewModel: ObservableObject {
+    //MARK: - Attribute
+    /// list of invoices
     @Published var invoices: [Invoice] = []
 
+    //MARK: - Behaviours
+    
+    /// Add invoice to `invoices`
     func addInvoice(_ invoice: Invoice) {
         invoices.append(invoice)
     }
 
+    /// Create  and add Invoice
     func createInvoice(from items: [MenuList.MenuItem], tipText: String, feedback: String, emoji: String?) {
         let tip = Double(tipText) ?? 0
         let total = items.reduce(0) { $0 + Double($1.quantity) * $1.price }
@@ -31,24 +37,18 @@ class InvoiceViewModel: ObservableObject {
             }
         }()
 
-        let invoice = Invoice(
-            id: UUID(),
-            date: Date(),
-            items: items,
-            totalAmount: total + tip,
-            tip: tip,
-            feedback: combinedFeedback
-        )
-
+        let invoice = Invoice(id: UUID(), date: Date(), items: items, totalAmount: total + tip, tip: tip, feedback: combinedFeedback)
         addInvoice(invoice)
     }
 
-    var formattedInvoices: [Invoice] {
+    /// Ordered invoice
+    var sortedInvoices: [Invoice] {
         invoices.sorted(by: { $0.date > $1.date })
     }
 
+    /// Grouped invoice by date
     var invoicesGroupedByDate: [String: [Invoice]] {
-        Dictionary(grouping: formattedInvoices) { invoice in
+        Dictionary(grouping: sortedInvoices) { invoice in
             invoice.date.formatted(date: .abbreviated, time: .omitted)
         }
     }

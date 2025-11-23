@@ -8,24 +8,23 @@
 import Combine
 import Foundation
 
-class MenuListViewModel {
-    @Published var menuItems: [MenuList.MenuItem]
-    var selectedMood: MoodCategory?
+final class MenuListViewModel {
+    // MARK: - Attributes
+    /// Menu items
+    @Published private var menuItems: [MenuList.MenuItem]
 
-    init(menuItems: [MenuList.MenuItem], selectedMood: MoodCategory? = nil) {
+    init(menuItems: [MenuList.MenuItem]) {
         self.menuItems = menuItems
-        self.selectedMood = selectedMood
-    }
-    
-    func isSelectedMood() -> Bool {
-        guard selectedMood != nil else { return false }
-        return true
     }
 
+    // MARK: - Behaviours
+    
+    /// Selected Menu items
     var selectedMoodItems: [MenuList.MenuItem] {
         menuItems
     }
 
+    /// Menu item grouped by categories
     var groupedByCategory: [String: [MenuList.MenuItem]] {
         Dictionary(grouping: menuItems, by: { $0.category })
     }

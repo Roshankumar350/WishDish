@@ -19,7 +19,7 @@ final class OrderViewModelTests: XCTestCase {
             MenuList.MenuItem(id: 1, name: "Pizza", description: "Cheesy", category: "Family Dining", price: 250, isAvailable: true, isPopular: true, isVegetarian: true, imageUrl: "", dietaryFlags: [], prepTimeMinutes: 10, spiceLevel: 1)
         ]))
         orderVM = OrderViewModel()
-        orderVM.menuVM = menuVM
+        orderVM.setMenuViewModel(menuVM)
     }
 
     func testSelectedItemsWithWaterIncludesMineralWater() {
