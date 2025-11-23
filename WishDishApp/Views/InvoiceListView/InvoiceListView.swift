@@ -24,7 +24,7 @@ struct InvoiceListView: View {
 
     var body: some View {
         NavigationStack {
-            if viewModel.formattedInvoices.isEmpty {
+            if viewModel.sortedInvoices.isEmpty {
                 EmptyView()
                 .padding()
             } else {
