@@ -19,39 +19,41 @@ struct InvoiceListView: View {
         static let total = "Total"
         static let feedback = "Feedback:"
         static let yourInvoices = "Your Invoices"
+        static let yourInvoicesSummery = "Your Invoice Summary"
     }
+    
     @ObservedObject var viewModel: InvoiceViewModel
-
+    
     var body: some View {
         NavigationStack {
             if viewModel.sortedInvoices.isEmpty {
                 EmptyView()
-                .padding()
+                    .padding()
             } else {
                 List {
                     ForEach(viewModel.invoicesGroupedByDate.keys.sorted(), id: \.self) { dateKey in
                         Section(header: Text(dateKey).sectionHeaderText()) {
                             ForEach(viewModel.invoicesGroupedByDate[dateKey] ?? []) { invoice in
-                                LazyVStack(alignment: .leading, spacing: 8) {
-                                    ForEach(invoice.items, id: \.id) { item in
-                                        CellView(item: item)
+                                NavigationLink {
+                                    InvoiceCircularChart(rawComponents: viewModel.getInvoiceComponent(for: invoice))
+                                } label: {
+                                    LazyVStack(alignment: .leading, spacing: 8) {
+                                        ForEach(invoice.items, id: \.id) { item in
+                                            CellView(item: item)
+                                        }
+                                        Divider()
+                                        ChargesView(invoice: invoice)
+                                        if let feedback = invoice.feedback {
+                                            FeedbackView(feedback: feedback)
+                                        }
                                     }
-
-                                    Divider()
-                                    
-                                    ChargesView(invoice: invoice)
-                                    
-                                    if let feedback = invoice.feedback {
-                                        FeedbackView(feedback: feedback)
-                                    }
+                                    .padding(.vertical, 8)
                                 }
-                                .padding(.vertical, 8)
                             }
                         }
                     }
                 }
                 .listStyle(.insetGrouped)
-
             }
         }
         .navigationTitle(Constant.yourInvoices)

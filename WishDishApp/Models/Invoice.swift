@@ -29,3 +29,9 @@ extension Invoice {
         totalAmount - tip - sgst - cgst
     }
 }
+
+struct InvoiceComponent: Identifiable {
+    let id = UUID()
+    let label: String
+    let amount: Double
+}

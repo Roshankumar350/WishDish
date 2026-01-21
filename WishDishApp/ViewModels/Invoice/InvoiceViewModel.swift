@@ -52,5 +52,15 @@ final class InvoiceViewModel: ObservableObject {
             invoice.date.formatted(date: .abbreviated, time: .omitted)
         }
     }
+    
+    func getInvoiceComponent(for selectedInvoice: Invoice) -> [InvoiceComponent] {
+        var expectation = [InvoiceComponent]()
+        
+        selectedInvoice.items.forEach { item in
+            expectation.append(InvoiceComponent(label: item.name, amount: item.price))
+        }
+        
+        return expectation
+    }
 }
 
