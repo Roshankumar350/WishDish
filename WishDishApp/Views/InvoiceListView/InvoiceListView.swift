@@ -23,7 +23,6 @@ struct InvoiceListView: View {
     }
     
     @ObservedObject var viewModel: InvoiceViewModel
-    @State private var showChart = false
     
     var body: some View {
         NavigationStack {

@@ -52,24 +52,6 @@ final class InvoiceViewModel: ObservableObject {
             invoice.date.formatted(date: .abbreviated, time: .omitted)
         }
     }
-
-    func getInvoices() -> [InvoiceComponent] {
-        var invoiceComponet = [InvoiceComponent]()
-        let calendar = Calendar.current
-        
-        let groupedByMonth = Dictionary(grouping: invoices) { invoice -> Date in
-            let components = calendar.dateComponents([.year, .month], from: invoice.date)
-            return calendar.date(from: components) ?? invoice.date
-        }
-        
-        for (eachKey, eachValue) in groupedByMonth {
-            let totalAmount = eachValue.reduce(0) { partialResult, invoice in
-                partialResult + invoice.totalAmount
-            }
-            invoiceComponet.append(InvoiceComponent(label: "\(eachKey.formatted(date: .abbreviated, time: .omitted))", amount: totalAmount))
-        }
-        return invoiceComponet
-    }
     
     func getInvoiceComponent(for selectedInvoice: Invoice) -> [InvoiceComponent] {
         var expectation = [InvoiceComponent]()
