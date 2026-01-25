@@ -36,6 +36,7 @@ struct InvoiceListView: View {
                             ForEach(viewModel.invoicesGroupedByDate[dateKey] ?? []) { invoice in
                                 NavigationLink {
                                     InvoiceCircularChart(rawComponents: viewModel.getInvoiceComponent(for: invoice))
+                                        .navigationTitle(Constant.yourInvoicesSummery)
                                 } label: {
                                     LazyVStack(alignment: .leading, spacing: 8) {
                                         ForEach(invoice.items, id: \.id) { item in

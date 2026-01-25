@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		702455082F1B68D80094F8CF /* InvoiceChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702455072F1B68D80094F8CF /* InvoiceChartView.swift */; };
+		702455082F1B68D80094F8CF /* InvoiceListView+Chart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702455072F1B68D80094F8CF /* InvoiceListView+Chart.swift */; };
 		702E41B52EB7AE7600664654 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702E41B42EB7AE7600664654 /* Settings.swift */; };
 		70D085032EAE1544005FAA78 /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D085022EAE1544005FAA78 /* MenuViewModel.swift */; };
 		70D085052EAE1740005FAA78 /* OrderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D085042EAE1740005FAA78 /* OrderViewModel.swift */; };
@@ -53,7 +53,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		702455072F1B68D80094F8CF /* InvoiceChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceChartView.swift; sourceTree = "<group>"; };
+		702455072F1B68D80094F8CF /* InvoiceListView+Chart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InvoiceListView+Chart.swift"; sourceTree = "<group>"; };
 		702E41B42EB7AE7600664654 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		70D085022EAE1544005FAA78 /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
 		70D085042EAE1740005FAA78 /* OrderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewModel.swift; sourceTree = "<group>"; };
@@ -218,7 +218,7 @@
 			isa = PBXGroup;
 			children = (
 				70FC87732EA64F9C00D6BF9F /* InvoiceListView.swift */,
-				702455072F1B68D80094F8CF /* InvoiceChartView.swift */,
+				702455072F1B68D80094F8CF /* InvoiceListView+Chart.swift */,
 			);
 			path = InvoiceListView;
 			sourceTree = "<group>";
@@ -465,7 +465,7 @@
 				70FC879A2EA64F9C00D6BF9F /* Order.swift in Sources */,
 				70FC879C2EA64F9C00D6BF9F /* RootTabView.swift in Sources */,
 				70FC879D2EA64F9C00D6BF9F /* MenuItem.swift in Sources */,
-				702455082F1B68D80094F8CF /* InvoiceChartView.swift in Sources */,
+				702455082F1B68D80094F8CF /* InvoiceListView+Chart.swift in Sources */,
 				70FC879E2EA64F9C00D6BF9F /* View+Extension.swift in Sources */,
 				70FC879F2EA64F9C00D6BF9F /* MenuListView.swift in Sources */,
 				70D085052EAE1740005FAA78 /* OrderViewModel.swift in Sources */,

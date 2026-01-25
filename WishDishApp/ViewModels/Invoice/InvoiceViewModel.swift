@@ -60,6 +60,10 @@ final class InvoiceViewModel: ObservableObject {
             expectation.append(InvoiceComponent(label: item.name, amount: item.price))
         }
         
+        expectation.append(InvoiceComponent(label: "Tip", amount: selectedInvoice.tip))
+        expectation.append(InvoiceComponent(label: "SGST", amount: selectedInvoice.sgst))
+        expectation.append(InvoiceComponent(label: "CGST", amount: selectedInvoice.cgst))
+        
         return expectation
     }
 }
