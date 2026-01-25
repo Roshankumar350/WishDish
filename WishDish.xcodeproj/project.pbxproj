@@ -137,8 +137,6 @@
 		70D084FA2EAE0ED8005FAA78 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				70D085012EAE13C7005FAA78 /* Status */,
-				70D085002EAE13B0005FAA78 /* Mood */,
 				70D084FF2EAE139B005FAA78 /* Invoice */,
 				70D084FE2EAE138E005FAA78 /* Order */,
 				70D084FD2EAE1375005FAA78 /* Menu */,
@@ -182,20 +180,6 @@
 				70FC87742EA64F9C00D6BF9F /* InvoiceViewModel.swift */,
 			);
 			path = Invoice;
-			sourceTree = "<group>";
-		};
-		70D085002EAE13B0005FAA78 /* Mood */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Mood;
-			sourceTree = "<group>";
-		};
-		70D085012EAE13C7005FAA78 /* Status */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Status;
 			sourceTree = "<group>";
 		};
 		70FC876F2EA64F9C00D6BF9F /* AddInvoiceView */ = {
