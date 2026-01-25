@@ -1,5 +1,5 @@
 //
-//  InvoiceChartView.swift
+//  InvoiceListView+Chart.swift
 //  WishDish
 //
 //  Created by Roshan Sah on 17/01/26.
@@ -24,10 +24,19 @@ extension InvoiceListView {
         }
         
         var body: some View {
-            VStack {
-                Text(Constant.yourInvoicesSummery)
-                    .modifier(SectionHeaderStyle())
+            VStack(alignment: .leading) {
+                Text("Total amount spent ₹ \(total, specifier: "%.2f")")
+                    .sectionHeaderText()
                     .padding()
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 16) {
+                        ForEach(rawComponents) { item in
+                            ItemCardView(name: item.label, price: item.amount)
+                        }
+                    }
+                    .padding(.horizontal)
+                }
+                
                 Chart(invoiceBreakdown, id: \.component.id) { item in
                     SectorMark(
                         angle: .value("Amount", item.component.amount),
@@ -48,4 +57,31 @@ extension InvoiceListView {
             }
         }
     }
+    
+    struct ItemCardView: View {
+        let name: String
+        let price: Double
+        
+        var body: some View {
+            VStack(alignment: .leading, spacing: 8) {
+                Text(name)
+                    .font(.headline)
+                    .foregroundColor(.primary)
+                    .lineLimit(2)
+                    .multilineTextAlignment(.leading)
+                    .fixedSize(horizontal: false, vertical: true)
+                
+                Text("₹ \(price, specifier: "%.2f")")
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+            }
+            .padding()
+            .frame(width: 180, height: 100)
+            .background(Color(.systemGray6))
+            .cornerRadius(12)
+            .shadow(radius: 2)
+        }
+    }
+
+    
 }
