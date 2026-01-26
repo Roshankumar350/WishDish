@@ -17,6 +17,7 @@ struct OnboardingView: View {
         static let invoiceSubtitle = "Generate invoices instantly with tax and tip breakdowns."
         static let invoiceHint = "You’ll get a dedicated chat screen for each invoice, with clear breakdowns and details."
         static let moodSubtitle = "Add feedback and emojis to capture the dining experience."
+        static let copyRight = "© 2026 WishDish. All rights reserved."
         
         // Buttons
         static let getStartedButton = "Get Started"
@@ -41,7 +42,6 @@ struct OnboardingView: View {
     var body: some View {
         TabView(selection: $currentPage) {
             
-            // Page 1 (Welcome)
             VStack(spacing: 24) {
                 Spacer()
                 VStack(spacing: 8) {
@@ -82,7 +82,6 @@ struct OnboardingView: View {
             .frame(maxHeight: .infinity)
             .tag(0)
             
-            // Page 2 (Menu)
             VStack(spacing: 24) {
                 Spacer()
                 VStack(spacing: 8) {
@@ -115,7 +114,6 @@ struct OnboardingView: View {
             .frame(maxHeight: .infinity)
             .tag(1)
             
-            // Page 3 (Invoice Intro)
             VStack(spacing: 24) {
                 Spacer()
                 VStack(spacing: 8) {
@@ -154,7 +152,6 @@ struct OnboardingView: View {
             .frame(maxHeight: .infinity)
             .tag(2)
             
-            // Page 4 (Mood & Explore + Copyright)
             VStack(spacing: 24) {
                 Spacer()
                 VStack(spacing: 8) {
@@ -190,8 +187,7 @@ struct OnboardingView: View {
                 .frame(maxWidth: .infinity)
                 .padding(.horizontal, Constant.horizontalMargin)
                 
-                // ✅ Copyright line
-                Text("© 2026 WishDish. All rights reserved.")
+                Text(Constant.copyRight)
                     .font(.footnote)
                     .foregroundColor(.secondary)
                     .padding(.top, 8)
