@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		702455082F1B68D80094F8CF /* InvoiceListView+Chart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702455072F1B68D80094F8CF /* InvoiceListView+Chart.swift */; };
 		702E41B52EB7AE7600664654 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702E41B42EB7AE7600664654 /* Settings.swift */; };
+		70B6BFE42F27A2F400CC9B2C /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B6BFE32F27A2F400CC9B2C /* OnboardingView.swift */; };
+		70B6BFE62F27A48F00CC9B2C /* Userdefault+Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B6BFE52F27A48F00CC9B2C /* Userdefault+Settings.swift */; };
 		70D085032EAE1544005FAA78 /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D085022EAE1544005FAA78 /* MenuViewModel.swift */; };
 		70D085052EAE1740005FAA78 /* OrderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D085042EAE1740005FAA78 /* OrderViewModel.swift */; };
 		70FC87902EA64F9C00D6BF9F /* Requirement.md in Resources */ = {isa = PBXBuildFile; fileRef = 70FC878D2EA64F9C00D6BF9F /* Requirement.md */; };
@@ -55,6 +57,8 @@
 /* Begin PBXFileReference section */
 		702455072F1B68D80094F8CF /* InvoiceListView+Chart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InvoiceListView+Chart.swift"; sourceTree = "<group>"; };
 		702E41B42EB7AE7600664654 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		70B6BFE32F27A2F400CC9B2C /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		70B6BFE52F27A48F00CC9B2C /* Userdefault+Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Userdefault+Settings.swift"; sourceTree = "<group>"; };
 		70D085022EAE1544005FAA78 /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
 		70D085042EAE1740005FAA78 /* OrderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewModel.swift; sourceTree = "<group>"; };
 		70FC876E2EA64F9C00D6BF9F /* AddInvoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddInvoiceView.swift; sourceTree = "<group>"; };
@@ -122,6 +126,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		70B6BFE22F27A2E000CC9B2C /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				70B6BFE32F27A2F400CC9B2C /* OnboardingView.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
 		70D084F92EAE0EC8005FAA78 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -147,6 +159,7 @@
 		70D084FB2EAE0EE2005FAA78 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				70B6BFE22F27A2E000CC9B2C /* Onboarding */,
 				70FC87802EA64F9C00D6BF9F /* OrderStatusView */,
 				70FC877C2EA64F9C00D6BF9F /* DiningCarnivalView */,
 				70FC87852EA64F9C00D6BF9F /* RootTabView */,
@@ -254,6 +267,7 @@
 				70FC87872EA64F9C00D6BF9F /* View+Extension.swift */,
 				70FC87882EA64F9C00D6BF9F /* ViewModifiers.swift */,
 				702E41B42EB7AE7600664654 /* Settings.swift */,
+				70B6BFE52F27A48F00CC9B2C /* Userdefault+Settings.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -445,6 +459,7 @@
 				70FC87972EA64F9C00D6BF9F /* InvoiceViewModel.swift in Sources */,
 				70D085032EAE1544005FAA78 /* MenuViewModel.swift in Sources */,
 				70FC87982EA64F9C00D6BF9F /* AddInvoiceView.swift in Sources */,
+				70B6BFE62F27A48F00CC9B2C /* Userdefault+Settings.swift in Sources */,
 				70FC87992EA64F9C00D6BF9F /* OrderStatus.swift in Sources */,
 				70FC879A2EA64F9C00D6BF9F /* Order.swift in Sources */,
 				70FC879C2EA64F9C00D6BF9F /* RootTabView.swift in Sources */,
@@ -459,6 +474,7 @@
 				70FC87A32EA64F9C00D6BF9F /* MenuListViewModel.swift in Sources */,
 				70FC87A42EA64F9C00D6BF9F /* DiningCarnivalView.swift in Sources */,
 				70FC87A52EA64F9C00D6BF9F /* OrderStatusView.swift in Sources */,
+				70B6BFE42F27A2F400CC9B2C /* OnboardingView.swift in Sources */,
 				702E41B52EB7AE7600664654 /* Settings.swift in Sources */,
 				70FC87A62EA64F9C00D6BF9F /* ClientResourceLoader.swift in Sources */,
 				70FC87A72EA64F9C00D6BF9F /* Character+Extension.swift in Sources */,
