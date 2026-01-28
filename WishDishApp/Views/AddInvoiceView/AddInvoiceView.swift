@@ -228,6 +228,21 @@ extension AddInvoiceView {
         @Binding var selectedEmoji: String?
         let emojiOptions: [String]
         
+        var prepopulatedFeedback: String {
+            switch selectedEmoji {
+            case "😍":
+                return "Food is awesome"
+            case "😊":
+                return "Food is good/satisfying"
+            case "😐":
+                return "Food is mediocre/forgettable"
+            case "😠":
+                return "Food is terrible/unacceptable"
+            default:
+                return ""
+            }
+        }
+        
         var body: some View {
             VStack(spacing: 12) {
                 TextField(AddInvoiceConstant.tip, text: $tipText)
@@ -244,10 +259,11 @@ extension AddInvoiceView {
                             Text(emoji)
                                 .font(.largeTitle)
                                 .padding(8)
-                                .background(selectedEmoji == emoji ? Color.blue.opacity(0.2) : Color.clear)
+                                .background(selectedEmoji == emoji ? Color.blue.opacity(0.4) : Color.clear)
                                 .cornerRadius(8)
                                 .onTapGesture {
                                     selectedEmoji = emoji
+                                    feedback = prepopulatedFeedback
                                 }
                         }
                     }

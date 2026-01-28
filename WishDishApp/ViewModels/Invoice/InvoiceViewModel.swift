@@ -57,7 +57,7 @@ final class InvoiceViewModel: ObservableObject {
         var expectation = [InvoiceComponent]()
         
         selectedInvoice.items.forEach { item in
-            expectation.append(InvoiceComponent(label: item.name, amount: item.price))
+            expectation.append(InvoiceComponent(label: item.name, amount: item.price * Double(item.quantity)))
         }
         
         expectation.append(InvoiceComponent(label: "Tip", amount: selectedInvoice.tip))

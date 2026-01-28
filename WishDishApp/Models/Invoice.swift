@@ -28,6 +28,10 @@ extension Invoice {
     var subtotal: Double {
         totalAmount - tip - sgst - cgst
     }
+    
+    var totalBilled: Double {
+        totalAmount + sgst + cgst
+    }
 }
 
 struct InvoiceComponent: Identifiable {
