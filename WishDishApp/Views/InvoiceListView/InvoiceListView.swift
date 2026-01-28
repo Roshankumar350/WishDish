@@ -132,7 +132,7 @@ extension InvoiceListView {
             HStack {
                 Text(Constant.total).sectionHeaderText()
                 Spacer()
-                Text("₹\(invoice.totalAmount, specifier: "%.2f")").titleText()
+                Text("₹\(invoice.totalBilled, specifier: "%.2f")").titleText()
             }
         }
     }
