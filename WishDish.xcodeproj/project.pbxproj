@@ -30,7 +30,6 @@
 		70FC87A02EA64F9C00D6BF9F /* InvoiceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FC87732EA64F9C00D6BF9F /* InvoiceListView.swift */; };
 		70FC87A12EA64F9C00D6BF9F /* WishDishApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FC878E2EA64F9C00D6BF9F /* WishDishApp.swift */; };
 		70FC87A22EA64F9C00D6BF9F /* Invoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FC87722EA64F9C00D6BF9F /* Invoice.swift */; };
-		70FC87A32EA64F9C00D6BF9F /* MenuListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FC87782EA64F9C00D6BF9F /* MenuListViewModel.swift */; };
 		70FC87A42EA64F9C00D6BF9F /* DiningCarnivalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FC877B2EA64F9C00D6BF9F /* DiningCarnivalView.swift */; };
 		70FC87A52EA64F9C00D6BF9F /* OrderStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FC877F2EA64F9C00D6BF9F /* OrderStatusView.swift */; };
 		70FC87A62EA64F9C00D6BF9F /* ClientResourceLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FC87702EA64F9C00D6BF9F /* ClientResourceLoader.swift */; };
@@ -68,7 +67,6 @@
 		70FC87742EA64F9C00D6BF9F /* InvoiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceViewModel.swift; sourceTree = "<group>"; };
 		70FC87762EA64F9C00D6BF9F /* MenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
 		70FC87772EA64F9C00D6BF9F /* MenuListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuListView.swift; sourceTree = "<group>"; };
-		70FC87782EA64F9C00D6BF9F /* MenuListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuListViewModel.swift; sourceTree = "<group>"; };
 		70FC877A2EA64F9C00D6BF9F /* Mood.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mood.swift; sourceTree = "<group>"; };
 		70FC877B2EA64F9C00D6BF9F /* DiningCarnivalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiningCarnivalView.swift; sourceTree = "<group>"; };
 		70FC877D2EA64F9C00D6BF9F /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
@@ -173,7 +171,6 @@
 		70D084FD2EAE1375005FAA78 /* Menu */ = {
 			isa = PBXGroup;
 			children = (
-				70FC87782EA64F9C00D6BF9F /* MenuListViewModel.swift */,
 				70D085022EAE1544005FAA78 /* MenuViewModel.swift */,
 			);
 			path = Menu;
@@ -471,7 +468,6 @@
 				70FC87A02EA64F9C00D6BF9F /* InvoiceListView.swift in Sources */,
 				70FC87A12EA64F9C00D6BF9F /* WishDishApp.swift in Sources */,
 				70FC87A22EA64F9C00D6BF9F /* Invoice.swift in Sources */,
-				70FC87A32EA64F9C00D6BF9F /* MenuListViewModel.swift in Sources */,
 				70FC87A42EA64F9C00D6BF9F /* DiningCarnivalView.swift in Sources */,
 				70FC87A52EA64F9C00D6BF9F /* OrderStatusView.swift in Sources */,
 				70B6BFE42F27A2F400CC9B2C /* OnboardingView.swift in Sources */,
