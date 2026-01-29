@@ -28,7 +28,7 @@ struct DiningCarnivalView: View {
                         .customTextStyle(font: .largeTitle, weight: .bold)
                         .sectionHeaderStyle()
 
-                    Text(Constant.diningCarnival)
+                    Text(Constant.browseMood)
                         .customTextStyle(font: .headline, color: .secondary, padding: 4)
                         .sectionHeaderStyle()
 
