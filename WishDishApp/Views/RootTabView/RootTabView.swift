@@ -18,6 +18,13 @@ struct RootTabView: View {
         static let addInvoice = "Add Invoice"
         static let addInvoiceImage = "plus.circle"
     }
+    
+    enum Tab: Int {
+        case mood
+        case menu
+        case invoice
+        case addinvoice
+    }
 
     @StateObject private var menuVM: MenuViewModel
     @StateObject private var orderVM: OrderViewModel
@@ -47,7 +54,7 @@ struct RootTabView: View {
                 )
             }
             .tabItem { Label(Constant.mood, systemImage: Constant.moodImage) }
-            .tag(0)
+            .tag(Tab.mood)
 
             NavigationStack {
                 MenuListView(
@@ -59,13 +66,13 @@ struct RootTabView: View {
                 )
             }
             .tabItem { Label(Constant.menu, systemImage: Constant.menuImage) }
-            .tag(1)
+            .tag(Tab.menu)
 
             NavigationStack {
                 InvoiceListView(viewModel: invoiceVM)
             }
             .tabItem { Label(Constant.invoice, systemImage: Constant.invoiceImage) }
-            .tag(2)
+            .tag(Tab.invoice)
 
             NavigationStack {
                 AddInvoiceView(
@@ -75,9 +82,8 @@ struct RootTabView: View {
                 )
             }
             .tabItem { Label(Constant.addInvoice, systemImage: Constant.addInvoiceImage) }
-            .tag(3)
+            .tag(Tab.addinvoice)
         }
-        .accentColor(.green)
         .onChange(of: selectedTab) {
             if selectedTab == 0 {
                 resetPathTrigger.toggle()
