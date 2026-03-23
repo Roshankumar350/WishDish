@@ -23,11 +23,7 @@ struct DiningCarnivalView: View {
     var body: some View {
         NavigationStack(path: $path) {
             ScrollView {
-                VStack(alignment: .leading, spacing: 16) {
-                    Text(Constant.diningCarnival)
-                        .customTextStyle(font: .largeTitle, weight: .bold)
-                        .sectionHeaderStyle()
-
+                VStack(alignment: .leading, spacing: 16) { 
                     Text(Constant.browseMood)
                         .customTextStyle(font: .headline, color: .secondary, padding: 4)
                         .sectionHeaderStyle()
@@ -53,8 +49,8 @@ struct DiningCarnivalView: View {
                     selectedTab: $selectedTab,
                     selectedMood: mood
                 )
-
             }
+            .navigationTitle( Constant.diningCarnival)
         }
         .onChange(of: selectedTab) {
             if selectedTab == 0 {
